@@ -1,0 +1,174 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Periodic Table</title>
+</head>
+<body>
+
+    <h1>Event Delegation - Periodic Table</h1>
+    <section class="mainBody"></section>
+
+    <h2>Periodic Table Color Legend</h2>
+    <table class="color-legend">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Color</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Noble Gases</td>
+                <td class="color-box noble-gases"></td>
+                <td>Light blue color is used for noble gases (e.g., Helium, Neon, Argon). These gases are colorless, odorless, and tasteless under standard conditions.</td>
+            </tr>
+            <tr>
+                <td>Metals</td>
+                <td class="color-box metals"></td>
+                <td>Light yellow color represents metals (e.g., Lithium, Sodium, Calcium). Metals are typically good conductors of heat and electricity and are malleable.</td>
+            </tr>
+            <tr>
+                <td>Nonmetals</td>
+                <td class="color-box nonmetals"></td>
+                <td>Light green color is used for nonmetals (e.g., Carbon, Nitrogen, Phosphorus). Nonmetals generally have more varied physical properties than metals.</td>
+            </tr>
+            <tr>
+                <td>Metalloids</td>
+                <td class="color-box metalloids"></td>
+                <td>Gray color represents metalloids (e.g., Boron, Silicon, Germanium). Metalloids have properties that are intermediate between metals and nonmetals.</td>
+            </tr>
+            <tr>
+                <td>Transition Metals</td>
+                <td class="color-box transition-metals"></td>
+                <td>Gray color is used for transition metals (e.g., Iron, Copper, Zinc). These elements are characterized by their ability to form various oxidation states.</td>
+            </tr>
+            <tr>
+                <td>Post-Transition Metals</td>
+                <td class="color-box post-transition-metals"></td>
+                <td>Orange color represents post-transition metals (e.g., Gallium, Indium, Tin). These metals have properties that are somewhat between transition metals and metalloids.</td>
+            </tr>
+            <tr>
+                <td>Nonmetals (Additional)</td>
+                <td class="color-box additional-nonmetals"></td>
+                <td>Yellow and red colors for additional nonmetals (e.g., Selenium, Bromine). These colors are used to distinguish nonmetals with different properties or states.</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+
+const elements = [
+    { symbol: "H", atomicNumber: 1, name: "Hydrogen" },
+    { symbol: "He", atomicNumber: 2, name: "Helium" },
+    { symbol: "Li", atomicNumber: 3, name: "Lithium" },
+    { symbol: "Be", atomicNumber: 4, name: "Beryllium" },
+    { symbol: "B", atomicNumber: 5, name: "Boron" },
+    { symbol: "C", atomicNumber: 6, name: "Carbon" },
+    { symbol: "N", atomicNumber: 7, name: "Nitrogen" },
+    { symbol: "O", atomicNumber: 8, name: "Oxygen" },
+    { symbol: "F", atomicNumber: 9, name: "Fluorine" },
+    { symbol: "Ne", atomicNumber: 10, name: "Neon" },
+    { symbol: "Na", atomicNumber: 11, name: "Sodium" },
+    { symbol: "Mg", atomicNumber: 12, name: "Magnesium" },
+    { symbol: "Al", atomicNumber: 13, name: "Aluminum" },
+    { symbol: "Si", atomicNumber: 14, name: "Silicon" },
+    { symbol: "P", atomicNumber: 15, name: "Phosphorus" },
+    { symbol: "S", atomicNumber: 16, name: "Sulfur" },
+    { symbol: "Cl", atomicNumber: 17, name: "Chlorine" },
+    { symbol: "Ar", atomicNumber: 18, name: "Argon" },
+    { symbol: "K", atomicNumber: 19, name: "Potassium" },
+    { symbol: "Ca", atomicNumber: 20, name: "Calcium" },
+    { symbol: "Sc", atomicNumber: 21, name: "Scandium" },
+    { symbol: "Ti", atomicNumber: 22, name: "Titanium" },
+    { symbol: "V", atomicNumber: 23, name: "Vanadium" },
+    { symbol: "Cr", atomicNumber: 24, name: "Chromium" },
+    { symbol: "Mn", atomicNumber: 25, name: "Manganese" },
+    { symbol: "Fe", atomicNumber: 26, name: "Iron" },
+    { symbol: "Co", atomicNumber: 27, name: "Cobalt" },
+    { symbol: "Ni", atomicNumber: 28, name: "Nickel" },
+    { symbol: "Cu", atomicNumber: 29, name: "Copper" },
+    { symbol: "Zn", atomicNumber: 30, name: "Zinc" },
+    { symbol: "Ga", atomicNumber: 31, name: "Gallium" },
+    { symbol: "Ge", atomicNumber: 32, name: "Germanium" },
+    { symbol: "As", atomicNumber: 33, name: "Arsenic" },
+    { symbol: "Se", atomicNumber: 34, name: "Selenium" },
+    { symbol: "Br", atomicNumber: 35, name: "Bromine" },
+    { symbol: "Kr", atomicNumber: 36, name: "Krypton" },
+    { symbol: "Rb", atomicNumber: 37, name: "Rubidium" },
+    { symbol: "Sr", atomicNumber: 38, name: "Strontium" },
+    { symbol: "Y", atomicNumber: 39, name: "Yttrium" },
+    { symbol: "Zr", atomicNumber: 40, name: "Zirconium" },
+    { symbol: "Nb", atomicNumber: 41, name: "Niobium" },
+    { symbol: "Mo", atomicNumber: 42, name: "Molybdenum" },
+    { symbol: "Tc", atomicNumber: 43, name: "Technetium" },
+    { symbol: "Ru", atomicNumber: 44, name: "Ruthenium" },
+    { symbol: "Rh", atomicNumber: 45, name: "Rhodium" },
+    { symbol: "Pd", atomicNumber: 46, name: "Palladium" },
+    { symbol: "Ag", atomicNumber: 47, name: "Silver" },
+    { symbol: "Cd", atomicNumber: 48, name: "Cadmium" },
+    { symbol: "In", atomicNumber: 49, name: "Indium" },
+    { symbol: "Sn", atomicNumber: 50, name: "Tin" },
+];
+
+// Function to create a single element for the periodic table
+const createPeriodicTable = (symbol, atomicNumber, name) => {
+    // Create a new div element to represent the chemical element
+    const element = document.createElement("div");
+
+    // Add the class 'element' to the div to apply styles
+    element.classList.add("element");
+
+    // Set the text inside the div to the element's symbol (e.g., H for Hydrogen)
+    element.innerText = symbol;
+
+    // Store the atomic number and element name as attributes of the div for later use
+    element.setAttribute("data-atomic-number", atomicNumber);
+    element.setAttribute("data-element-name", name);
+    
+    // Return the newly created element div
+    return element;
+};
+
+// Function to handle click events on the elements
+const handleElementClick = (event) => {
+    // Identify the specific element that was clicked
+    const target = event.target;
+
+    // Check if the clicked element has the 'element' class
+    if (target.classList.contains("element")) {
+        // Retrieve the atomic number and element name from the clicked element's attributes
+        const atomicNumber = target.getAttribute("data-atomic-number");
+        const elementName = target.getAttribute("data-element-name");
+
+        // Display an alert with the element's name and atomic number
+        alert(`Element: ${elementName}\nAtomic Number: ${atomicNumber}`);
+    }
+};
+
+// Function to initialize and display the entire periodic table
+function initializePeriodicTable() {
+    // Select the container where all elements will be placed
+    const mainBody = document.querySelector(".mainBody");
+
+    // Loop through each element in the 'elements' array and create a div for it
+    elements.forEach((element) => {
+        // Create the div using the createPeriodicTable function
+        const elementDiv = createPeriodicTable(element.symbol, element.atomicNumber, element.name);
+
+        // Append the newly created div to the main container
+        mainBody.append(elementDiv);
+    });
+
+    // Add an event listener to the container to handle clicks on any element
+    mainBody.addEventListener("click", handleElementClick);
+}
+
+// Call the function to initialize the periodic table on page load
+initializePeriodicTable();
+
+
+    </script>
+</body>
+</html>
